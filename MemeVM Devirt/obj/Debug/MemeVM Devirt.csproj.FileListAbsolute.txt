@@ -1,0 +1,9 @@
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\obj\Debug\MemeVM Devirt.csprojAssemblyReference.cache
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\obj\Debug\MemeVM Devirt.csproj.CoreCompileInputs.cache
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\bin\Debug\MemeVM Devirt.exe.config
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\bin\Debug\MemeVM Devirt.exe
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\bin\Debug\MemeVM Devirt.pdb
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\bin\Debug\dnlib.dll
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\obj\Debug\MemeVM Devirt.csproj.CopyComplete
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\obj\Debug\MemeVM Devirt.exe
+C:\Users\VirtualMachine\Documents\GitHub\MemeVMDevirt\MemeVM Devirt\obj\Debug\MemeVM Devirt.pdb

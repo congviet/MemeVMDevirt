@@ -15,17 +15,24 @@ namespace MemeVMDevirt.Protections
 {
     public static class InitialiseReplace
     {
-        public static void ReplacePhase()
+		public static List<Instruction> _method;
+		public static MethodDef _current;
+		public static void ReplacePhase()
         {
             foreach (var methodvirt in Stores.MethodVirt)
             {
-                methodvirt.Key.Body.Instructions.Clear();
+				_current = methodvirt.Key;
+				_method = new List<Instruction>();
+				methodvirt.Key.Body.Instructions.Clear();
 				foreach(VMInstruction instruction in Stores._methods[methodvirt.Value])
 				{
-					Instruction inst = Reconvert(instruction, instruction.Code);
-					methodvirt.Key.Body.Instructions.Add(inst);
+					_method.Add(Reconvert(instruction, instruction.Code));
 				}
-            }
+				foreach (Instruction instruction in _method)
+				{
+					methodvirt.Key.Body.Instructions.Add(instruction);
+				}
+			}
         }
 		public static Instruction Reconvert(VMInstruction _instruction, VMOpCode vMOpCode)
 		{
@@ -70,15 +77,15 @@ namespace MemeVMDevirt.Protections
 		}
 		public static Instruction Brfalse(VMInstruction instruction)
 		{
-			return Instruction.Create(OpCodes.Brfalse, (int)instruction.Operand);
+			return Instruction.Create(OpCodes.Brfalse, _method[(int)instruction.Operand]);
 		}
 		public static Instruction Brtrue(VMInstruction instruction)
 		{
-			return Instruction.Create(OpCodes.Brtrue, (int)instruction.Operand);
+			return Instruction.Create(OpCodes.Brtrue, _method[(int)instruction.Operand]);
 		}
 		public static Instruction Br(VMInstruction instruction)
 		{
-			return Instruction.Create(OpCodes.Br, (int)instruction.Operand);
+			return Instruction.Create(OpCodes.Br, _method[(int)instruction.Operand]);
 		}
 		public static Instruction Dup(VMInstruction instruction)
 		{
@@ -169,36 +176,14 @@ namespace MemeVMDevirt.Protections
 		public static Instruction Ldloc(VMInstruction instruction)
 		{
 			short num = (short)instruction.Operand;
-			switch (num)
-			{
-				case 0:
-					return new Instruction(OpCodes.Ldloc_0);
-				case 1:
-					return new Instruction(OpCodes.Ldloc_1);
-				case 2:
-					return new Instruction(OpCodes.Ldloc_2);
-				case 3:
-					return new Instruction(OpCodes.Ldloc_3);
-				default:
-					return new Instruction(OpCodes.Ldloc_S, num);
-			}
+			Local locals = _current.Body.Variables[num];
+			return new Instruction(OpCodes.Ldloc, locals);
 		}
 		public static Instruction Stloc(VMInstruction instruction)
 		{
-			short num = (short)instruction.Operand;
-			switch (num)
-			{
-				case 0:
-					return new Instruction(OpCodes.Stloc_0);
-				case 1:
-					return new Instruction(OpCodes.Stloc_1);
-				case 2:
-					return new Instruction(OpCodes.Stloc_2);
-				case 3:
-					return new Instruction(OpCodes.Stloc_3);
-				default:
-					return new Instruction(OpCodes.Stloc_S, num);
-			}
+			object num = instruction.Operand;//i know than is not that but i'm lazy
+			Local locals = _current.Body.Variables.Add(new Local(module.Import(num.GetType()).ToTypeSig()));
+			return new Instruction(OpCodes.Stloc, locals);
 		}
 		public static Instruction Ldarg(VMInstruction instruction)
 		{

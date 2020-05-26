@@ -36,9 +36,8 @@
     <ApplicationIcon>virus.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="dnlib, Version=3.3.2.0, Culture=neutral, PublicKeyToken=50e96378b6e77999, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\CLI Guishieds Epreuve\CLI\CLI\bin\Debug\dnlib.dll</HintPath>
+    <Reference Include="dnlib">
+      <HintPath>..\Dependencies\dnlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

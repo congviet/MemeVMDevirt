@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MemeVMDevirt.Protections
 {
-    public static class InitiliseMethod
+	public static class InitiliseMethod
 	{
 		public static void InitiliaseMethodage()
 		{
@@ -38,9 +38,9 @@ namespace MemeVMDevirt.Protections
 		}
 		public static VMInstruction Map(VMOpCode vMOpCode, BinaryReader binaryReader)
 		{
-			switch(vMOpCode)
+			switch (vMOpCode)
 			{
-				case VMOpCode.Add: return Add(binaryReader);	
+				case VMOpCode.Add: return Add(binaryReader);
 				case VMOpCode.Call: return Call(binaryReader);
 				case VMOpCode.Cgt: return Cgt(binaryReader);
 				case VMOpCode.Clt: return Clt(binaryReader);
@@ -64,7 +64,7 @@ namespace MemeVMDevirt.Protections
 
 
 				default:
-					throw new Exception($"OpCode : {vMOpCode} Not Supported");			
+					throw new Exception($"OpCode : {vMOpCode} Not Supported");
 			}
 		}
 		public static VMInstruction Add(BinaryReader binaryReader)
@@ -81,7 +81,7 @@ namespace MemeVMDevirt.Protections
 		}
 		public static VMInstruction Clt(BinaryReader binaryReader)
 		{
-			return new VMInstruction(VMOpCode.Cgt, null);
+			return new VMInstruction(VMOpCode.Clt, null);
 		}
 		public static VMInstruction Cmp(BinaryReader binaryReader)
 		{
@@ -101,7 +101,7 @@ namespace MemeVMDevirt.Protections
 		}
 		public static VMInstruction Null(BinaryReader binaryReader)
 		{
-			return new VMInstruction(VMOpCode.Dup, null);
+			return new VMInstruction(VMOpCode.Null, null);
 		}
 		public static VMInstruction Int32(BinaryReader binaryReader)
 		{
@@ -137,7 +137,7 @@ namespace MemeVMDevirt.Protections
 		}
 		public static VMInstruction Stloc(BinaryReader binaryReader)
 		{
-			return new VMInstruction(VMOpCode.Ldloc, binaryReader.ReadInt16());
+			return new VMInstruction(VMOpCode.Stloc, binaryReader.ReadInt16());
 		}
 		public static VMInstruction Int64(BinaryReader binaryReader)
 		{
@@ -150,7 +150,7 @@ namespace MemeVMDevirt.Protections
 		}
 		public static VMInstruction NewArray(BinaryReader binaryReader)
 		{
-			return new VMInstruction(VMOpCode.Ldfld, new Tuple<short, int>(binaryReader.ReadInt16(), binaryReader.ReadInt32()));
+			return new VMInstruction(VMOpCode.Newarr, new Tuple<short, int>(binaryReader.ReadInt16(), binaryReader.ReadInt32()));
 		}
 	}
 }
